@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blockchain.ai - The Future of AI, Powered by Trust</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* --- CSS Styles for the Page --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #0d1117; /* Dark background */
+            color: #c9d1d9; /* Light text */
+            line-height: 1.7;
+        }
+        header {
+            background: linear-gradient(90deg, #1f2a37, #111827);
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #30363d;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.75rem;
+        }
+        nav a {
+            color: #58a6ff;
+            text-decoration: none;
+            margin: 0 0.75rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #79c0ff;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+        .hero h2 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: #8b949e;
+        }
+        .section {
+            background-color: #161b22;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .feature-card {
+            background-color: #0d1117;
+            padding: 2rem;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            border-left-width: 4px;
+            text-align: center;
+            flex-basis: 300px; /* Base width for each card */
+            /* REMOVED flex-grow: 1; to prevent stretching */
+        }
+        .feature-card h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .feature-card p {
+            text-align: left;
+        }
+        .feature-card strong {
+            color: #c9d1d9;
+        }
+        
+        /* --- Icon Styles --- */
+        .icon-container {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- RGB & Thematic Color Scheme --- */
+        .card-red { border-left-color: #ff4d4d; }
+        .card-red h3, .problem-red, .icon-red { color: #ff4d4d; }
+        .problem-box.card-red { border-left-color: #ff4d4d; }
+        .card-red .usp { color: #ff4d4d; border-left-color: #ff4d4d; }
+        .rollout-phase.card-red { border-left-color: #ff4d4d; }
+        .rollout-phase.card-red h4 { color: #ff4d4d; }
+
+        .card-green { border-left-color: #3fb950; }
+        .card-green h3, .problem-green, .icon-green { color: #3fb950; }
+        .problem-box.card-green { border-left-color: #3fb950; }
+        .card-green .usp { color: #3fb950; border-left-color: #3fb950; }
+        .rollout-phase.card-green { border-left-color: #3fb950; }
+        .rollout-phase.card-green h4 { color: #3fb950; }
+
+        .card-blue { border-left-color: #58a6ff; }
+        .card-blue h3, .problem-blue, .icon-blue { color: #58a6ff; }
+        .problem-box.card-blue { border-left-color: #58a6ff; }
+        .card-blue .usp { color: #58a6ff; border-left-color: #58a6ff; }
+        .rollout-phase.card-blue { border-left-color: #58a6ff; }
+        .rollout-phase.card-blue h4 { color: #58a6ff; }
+
+        .icon-gold { color: #ffd700; }
+        
+        .usp {
+            font-style: italic;
+            display: block;
+            margin-top: 1rem;
+            border-left-width: 3px;
+            border-left-style: solid;
+            padding-left: 1rem;
+            text-align: left;
+        }
+        .vertical-container, .rollout-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .problem-box, .rollout-phase {
+            background-color: #0d1117;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left-width: 4px;
+            border-left-style: solid;
+        }
+        .problem-box p, .rollout-phase h4 {
+            margin-top: 0;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .rollout-phase p {
+            margin: 0;
+            text-align: left;
+        }
+
+        /* --- Investor Section Styles --- */
+        #investors .section-title {
+             color: #3fb950;
+        }
+        .opportunity-knocks {
+            text-align: center;
+            font-size: 1.75rem;
+            color: #3fb950;
+            font-weight: 600;
+            margin: 3rem 0;
+        }
+        .call-to-action {
+            margin-top: 2rem;
+            background-color: #043028;
+            border: 1px solid #3fb950;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #8b949e;
+            border-top: 1px solid #30363d;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>blockchain.ai</h1>
+        <nav>
+            <a href="#marketplace">Marketplace</a>
+            <a href="#vision">Vision</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#investors">For Investors</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h2>The Future of Artificial Intelligence</h2>
+            <p>A transparent, secure, and collaborative ecosystem where AI's true potential is unlocked on the blockchain.</p>
+        </section>
+
+        <section id="marketplace" class="section">
+            <h2 class="section-title">A Decentralized Marketplace for AI</h2>
+            <div class="feature-grid">
+                <div class="feature-card card-red">
+                    <div class="icon-container"><i class="fa-solid fa-code icon-red"></i></div>
+                    <h3>For AI Developers</h3>
+                    <p><strong>Value:</strong> Direct monetization and control over your intellectual property.</p>
+                    <p><strong>Benefit:</strong> Set your own prices and automate payments with smart contracts.</p>
+                    <span class="usp">"Your AI, your rules, your revenue."</span>
+                </div>
+                <div class="feature-card card-green">
+                    <div class="icon-container"><i class="fa-solid fa-chart-line icon-green"></i></div>
+                    <h3>For Businesses & Researchers</h3>
+                    <p><strong>Value:</strong> Access a diverse and validated pool of AI resources.</p>
+                    <p><strong>Benefit:</strong> Acquire trustworthy AI models with clear performance history.</p>
+                    <span class="usp">"Trustworthy AI on demand."</span>
+                </div>
+                <div class="feature-card card-blue">
+                    <div class="icon-container"><i class="fa-solid fa-database icon-blue"></i></div>
+                    <h3>For Data Owners</h3>
+                    <p><strong>Value:</strong> Monetize your data securely and with guaranteed privacy.</p>
+                    <p><strong>Benefit:</strong> Earn passive income while your data remains private.</p>
+                    <span class="usp">"Monetize your data without compromising it."</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="section">
+            <h2 class="section-title">The Core Vision</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon-container"><i class="fa-solid fa-file-contract" style="color: #79c0ff;"></i></div>
+                    <h3>Verifiable & Auditable AI</h3>
+                    <p>Establish the gold standard for ethical AI with an unchangeable record of any model's lifecycle.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-container"><i class="fa-solid fa-share-nodes" style="color: #79c0ff;"></i></div>
+                    <h3>Secure Federated Learning</h3>
+                    <p>Enable collaborative intelligence without centralized data pooling to build powerful models.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <h2 class="section-title">Public Roadmap</h2>
+            <div class="rollout-timeline">
+                <div class="rollout-phase card-red">
+                    <h4>Phase 1: Foundation</h4>
+                    <p>Launch the core platform in a controlled environment with vetted developers to prove the technology.</p>
+                </div>
+                <div class="rollout-phase card-green">
+                    <h4>Phase 2: Growth</h4>
+                    <p>Open the platform to the public, launch transaction fees, and begin wider marketing.</p>
+                </div>
+                <div class="rollout-phase card-blue">
+                    <h4>Phase 3: Ecosystem</h4>
+                    <p>Introduce the governance token and launch the full data marketplace to scale and decentralize.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="investors" class="section">
+            <h2 class="section-title">For Our Future Partners & Investors</h2>
+            
+            <h3 style="text-align:center; color: #ffffff;">The Opportunity: A Broken, Centralized AI Market</h3>
+            <p style="text-align:center; max-width: 800px; margin: 0 auto 2rem auto; color: #8b949e;">The rapid growth of AI is built on a fragile foundation, presenting a massive market opportunity for a decentralized alternative.</p>
+            
+            <div class="vertical-container">
+                <div class="problem-box card-red">
+                    <p><span class="problem-red">CRITICAL PROBLEM #1:</span> Data is siloed, insecure, and inaccessible, stalling innovation.</p>
+                </div>
+                <div class="problem-box card-green">
+                     <p><span class="problem-green">CRITICAL PROBLEM #2:</span> AI models are "black boxes," creating enormous compliance and ethical risks.</p>
+                </div>
+                <div class="problem-box card-blue">
+                     <p><span class="problem-blue">CRITICAL PROBLEM #3:</span> Developers lack IP protection and are subject to unfair platform fees.</p>
+                </div>
+            </div>
+
+            <h4 class="opportunity-knocks">OPPORTUNITY KNOCKS...</h4>
+
+            <h3 style="text-align:center; color: #ffffff; margin-top: 3rem;">Our Strategic Advantage (The Moat)</h3>
+            <div class="feature-grid" style="margin-top: 2rem;">
+                <div class="feature-card">
+                    <div class="icon-container"><i class="fa-solid fa-magnet icon-red"></i></div>
+                    <h4>Powerful Network Effects</h4>
+                    <p>More developers attract more businesses, which require more data—creating a self-reinforcing flywheel.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-container"><i class="fa-solid fa-coins icon-gold"></i></div>
+                    <h4>The $BAI Token Ecosystem</h4>
+                    <p>Our native token underpins the entire economy, creating a deep economic moat that cannot be easily replicated.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-container"><i class="fa-solid fa-shield-halved icon-blue"></i></div>
+                    <h4>Trust as a Core Feature</h4>
+                    <p>Our platform is built on verifiable trust from the ground up. This is our foundational, defensible brand.</p>
+                </div>
+            </div>
+
+            <div class="call-to-action">
+                <h3 style="text-align:center; color: #ffffff;">Join Us in Building the Future</h3>
+                <p style="text-align:center;">We are currently raising our seed round to accelerate development and capture the first-mover advantage. For a detailed prospectus and to speak with the founders, please contact us.</p>
+                <p style="text-align:center; font-size: 1.5rem; color: #ffffff; font-weight: bold; margin-top: 1rem;">invest@blockchain.ai</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 blockchain.ai - Building the Future of Trusted AI</p>
+    </footer>
+
+</body>
+</html>
