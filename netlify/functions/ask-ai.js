@@ -6,7 +6,8 @@ const fetch = require('node-fetch'); // For making HTTP requests to GitHub (Node
 
 // Initialize the Google Generative AI client
 // The API key is securely retrieved from Netlify Environment Variables
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// CHANGED: Using GEMINI_API_KEY2 as specified by the user
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY2); 
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 // Main handler for the Netlify Function
@@ -60,7 +61,7 @@ exports.handler = async (event) => {
             const response = await fetch(url, { headers });
             if (!response.ok) {
                 console.error(`Failed to fetch GitHub content from ${url}: ${response.status} ${response.statusText}`);
-                throw new Error(`GitHub API error: ${response.statusText}`);
+                throw new Error(`GitHub API error: ${response.statusText}`); // This is the error seen in your logs
             }
             const data = await response.json();
 
