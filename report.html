@@ -10,12 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- Favicon Added -->
     <link rel="icon" href="https://raw.githubusercontent.com/Wolfe-Jam/theblockchain-ai/main/Public/theBlockchain-ai-crop-sml.svg" type="image/svg+xml">
     
     <style>
         :root {
-            /* Updated Official Brand Colors */
+            /* Official Brand Colors */
             --brand-orange: #FF914D; /* Creative Orange */
             --brand-cyan: #0CC0DF;   /* Digital Turquoise */
             --brand-blue: #004AAE;   /* Blockchain Blue */
@@ -118,6 +117,59 @@
             font-weight: 500;
             color: #94a3b8;
         }
+
+        /* Corrected CSS for introductory bullet points with icons */
+        #intro .content-list {
+            list-style: none; /* Remove default bullet */
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+        #intro .content-list li {
+            position: relative;
+            padding-left: 3rem; /* Increased padding for text to start further from icon */
+            margin-bottom: 1.25rem; /* Increased margin-bottom for more line spacing */
+            line-height: 1.5;
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Vertically align icon and text */
+            text-align: left; /* Ensure text aligns left within the li */
+        }
+        #intro .content-list li i {
+            position: absolute;
+            left: 0;
+            font-size: 2rem; /* Slightly larger icon size for emphasis */
+            width: 2.5rem; /* Fixed width to prevent text reflow on different icons */
+            text-align: center; /* Center icon within its allocated space */
+        }
+        /* Hide the default ::before bullet for intro list items */
+        #intro .content-list li::before {
+            content: none;
+        }
+
+        /* Added spacing for highlighted span tags within content lists */
+        #intro .content-list li span.font-bold {
+            margin: 0 0.2em; /* Small horizontal margin around highlighted text */
+            display: inline-block; /* Allows margin to apply correctly */
+        }
+
+        /* Original custom bullet points for pillar cards (no change) */
+        .content-list {
+            list-style: none; /* Remove default bullet */
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+        .content-list li {
+            position: relative;
+            padding-left: 1rem; 
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        .content-list li::before {
+            content: '•'; /* Custom bullet point */
+            color: var(--brand-cyan); /* Color of the bullet */
+            position: absolute;
+            left: 0; 
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -125,7 +177,6 @@
     <header>
         <nav>
             <a href="index.html" class="nav-brand">
-                <!-- Header Logo Added -->
                 <img src="https://raw.githubusercontent.com/Wolfe-Jam/theblockchain-ai/main/Public/theBlockchain-ai-crop-sml.svg" alt="Logo" class="h-8 w-auto mr-3">
                 <span>theBlockchain.ai</span>
             </a>
@@ -139,72 +190,77 @@
     </header>
 
     <main class="container mx-auto p-8 md:p-16">
-        <!-- Introduction Section -->
         <section id="intro" class="text-center min-h-[60vh] flex flex-col justify-center items-center">
+            <img src="https://github.com/Wolfe-Jam/theblockchain-ai/blob/main/Public/theBlockchain-ai.png?raw=true" alt="theBlockchain.ai Logo" class="mx-auto my-8 h-48 w-auto" onerror="this.src='https://placehold.co/200x200/1E293B/FFFFFF?text=Logo+Not+Found'; this.onerror=null;">
+            
             <h2 class="text-4xl md:text-6xl font-extrabold leading-tight">
                 Building an <br> <span style="color:var(--brand-orange)">Unassailable Position</span>
             </h2>
-            <p class="mt-4 text-xl md:text-2xl text-slate-300 max-w-4xl">
-                An interactive exploration of the strategic moat forged by the synergy of Blockchain, The OUTPUT Marketplace, and A La Carte AI Automation Solutions for <span style="color:var(--brand-cyan)" class="font-bold">theBlockchain.ai</span>
-            </p>
-            <button class="generate-qna-btn mt-8 btn-base btn-accent" data-section="intro">
-                ✨ Generate Quick Q&A
-            </button>
-        </section>
+            <ul class="content-list mt-4 text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto">
+                <li><i class="fas fa-check-circle" style="color:var(--brand-blue);"></i> Discover how <span style="color:var(--brand-blue);" class="font-bold">theBlockchain.AI</span> ensures verifiable trust.</li>
+                <li><i class="fas fa-globe" style="color:var(--brand-cyan);"></i> Explore <span style="color:var(--brand-cyan);" class="font-bold">The OUTPUT Marketplace</span> for a vibrant AI ecosystem.</li>
+                <li><i class="fas fa-cogs" style="color:var(--brand-orange);"></i> Understand <span style="color:var(--brand-orange);" class="font-bold">Code-In-Action (CIA)</span>: Custom, Intelligent Automation.</li>
+            </ul>
+            </section>
 
-        <!-- Research & Deep Dive Section -->
         <section id="research-deep-dive" class="my-24 scroll-mt-24">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold">Research & Deep Dive: Our Strategic Blueprint</h2>
-                <p class="mt-4 text-lg text-slate-300 max-w-3xl mx-auto">This interactive report serves as a deep dive into the strategic vision of <span style="color:var(--brand-cyan)" class="font-bold">theBlockchain.ai</span>. It outlines how the integration of cutting-edge blockchain technology with a dynamic developer OUTPUT marketplace and tailored AI automation solutions creates a powerful, defensible market position.</p>
+                <h2 class="text-3xl md:text-4xl font-bold">Strategic Blueprint: The Deep Dive</h2>
+                <p class="mt-4 text-lg text-slate-300 max-w-3xl mx-auto">This report details the strategic blueprint enabling theBlockchain.ai to **define a New Trusted-AI and Automation market.** Our integration of cutting-edge blockchain technology, a dynamic developer OUTPUT marketplace, and tailored Code-In-Action AI solutions creates a powerful, defensible and unique market advantage.</p>
             </div>
             <div class="card p-6 text-center">
-                <h3 class="text-2xl font-bold mb-4" style="color:var(--brand-cyan)">theBlockchain.ai's Mission</h3>
-                <p id="missionStatement" class="mb-6">Our mission is to empower businesses with verifiable, transparent, and intelligent automation solutions. By establishing a trusted ecosystem for AI modules, we unlock measurable growth and unprecedented operational efficiency, ensuring every digital interaction is auditable and every investment pays for itself. We believe in building a future where AI and blockchain converge to deliver unparalleled business value.</p>
-                <button id="rephraseMissionBtn" class="btn-base btn-primary text-sm">
-                    ✨ Rephrase Mission for Audience
-                </button>
+                <h3 class="text-2xl font-bold mb-4" style="color:var(--brand-cyan)">A Win/Win/Win for the Entire Ecosystem.</h3>
+                <p id="missionStatement" class="mb-6 text-xl">
+                    **Developers Win:** Get paid directly for your code OUTPUT.
+                    <br>
+                    **Businesses Win:** Access a marketplace of secure, auditable AI Code-In-Action.
+                    <br>
+                    **Data Owners Win:** Monetize your data with guaranteed privacy through TOKENIZING.
+                </p>
             </div>
-            <button class="generate-qna-btn mt-8 btn-base btn-accent" data-section="research-deep-dive">
-                ✨ Generate Quick Q&A
-            </button>
-        </section>
+            </section>
 
 
-        <!-- Pillars Section -->
         <section id="pillars" class="my-24 scroll-mt-24">
             <div class="text-center pb-12">
                 <h2 class="text-3xl md:text-4xl font-bold">The Three Strategic Pillars</h2>
-                <!-- Corrected Logo Source -->
-                <img src="https://github.com/Wolfe-Jam/theblockchain-ai/blob/main/Public/theBlockchain-ai.png?raw=true" alt="theBlockchain.ai Logo" class="mx-auto my-8 h-40 w-40" onerror="this.src='https://placehold.co/200x200/1E293B/FFFFFF?text=Logo+Not+Found'; this.onerror=null;">
                 <p class="mt-4 text-lg text-slate-300 max-w-3xl mx-auto">
-                    These three foundational pillars–The Blockchain, The OUTPUT Marketplace, and Custom Business Solutions–converge to create our unassailable strategic position, represented by our logo.
+                    These three foundational pillars–<span style="color:var(--brand-blue); font-weight: bold;">The Blockchain</span>, The <span style="color:var(--brand-cyan); font-weight: bold;">OUTPUT</span> Marketplace, and <span style="color:var(--brand-orange); font-weight: bold;">Code-In-Action (CIA)</span>: Custom, Intelligent Automation–converge to create our unassailable strategic position, represented by our logo.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Pillar 1: Blockchain -->
                 <div class="card p-6 border-t-4" style="border-color: var(--brand-blue)">
-                    <h3 class="text-2xl font-bold mb-2" style="color: var(--brand-blue)">Pillar 1: The Blockchain</h3>
-                    <p class="text-slate-300 mb-4">Architecting trust, auditability, and trackable monetization. The blockchain layer provides a verifiable foundation for every module and transaction.</p>
+                    <h3 class="text-2xl font-bold mb-2" style="color: var(--brand-blue)">Pillar 1: <br> The Blockchain</h3>
+                    <ul class="content-list text-slate-300 mb-4">
+                        <li>Architecting trust, auditability, and trackable monetization.</li>
+                        <li>The blockchain layer provides a verifiable foundation for every module and transaction.</li>
+                    </ul>
                 </div>
 
-                <!-- Pillar 2: The OUTPUT -->
                 <div class="card p-6 border-t-4" style="border-color: var(--brand-cyan)">
-                    <h3 class="text-2xl font-bold mb-2" style="color: var(--brand-cyan)">Pillar 2: The OUTPUT</h3>
-                    <p class="text-slate-300 mb-4">A unified developer marketplace fostering a vibrant AI ecosystem for discovering, distributing, and monetizing AI automation modules.</p>
+                    <h3 class="text-2xl font-bold mb-2" style="color: var(--brand-cyan)">Pillar 2: <br> The OUTPUT</h3>
+                    <ul class="content-list text-slate-300 mb-4">
+                        <li>A unified developer marketplace fostering a vibrant AI ecosystem.</li>
+                        <li>For discovering, distributing, and monetizing AI automation modules.</li>
+                    </ul>
                 </div>
 
-                <!-- Pillar 3: Custom Solutions -->
                 <div class="card p-6 border-t-4" style="border-color: var(--brand-orange)">
-                    <h3 class="text-2xl font-bold mb-2" style="color: var(--brand-orange)">Pillar 3: Custom Solutions</h3>
-                    <p class="text-slate-300 mb-4">An A La Carte model providing bespoke AI solutions for high-value enterprise clients, leveraging modules from The OUTPUT marketplace.</p>
+                    <h3 class="text-2xl font-bold mb-2" style="color: var(--brand-orange)">Pillar 3: <br> Code-In-Action (CIA)</h3>
+                    <ul class="content-list text-slate-300 mb-4">
+                        <li>An A La Carte model for custom, intelligent automation for high-value enterprise clients.</li>
+                        <li>Leveraging modules from The OUTPUT marketplace.</li>
+                    </ul>
                 </div>
             </div>
-             <button class="generate-qna-btn mt-8 btn-base btn-accent" data-section="pillars">
-                ✨ Generate Quick Q&A
-            </button>
         </section>
+        
+        <div class="flex justify-center mt-16 mb-8">
+            <button class="generate-qna-btn btn-base btn-accent" data-section="all-sections">
+                Got a Question? Ask Our AI
+            </button>
+        </div>
 
     </main>
     
@@ -212,27 +268,12 @@
         <p>&copy; 2025 theBlockchain.ai - Building the Future of Trusted AI</p>
     </footer>
 
-    <!-- Modal for API Responses -->
     <div id="apiResponseModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3 id="modalTitle" class="text-2xl font-bold" style="color: var(--brand-cyan)"></h3>
             <div class="loading-spinner" id="modalSpinner"></div>
             <div id="modalContent" class="leading-relaxed mt-4"></div>
-            <!-- Audience selector for mission rephrasing -->
-            <div id="rephraseMissionControls" class="mt-4 p-4 border border-gray-500 rounded-md" style="display:none;">
-                <div class="mb-4">
-                    <label for="audienceSelect" class="block text-sm font-bold mb-2">Rephrase for:</label>
-                    <select id="audienceSelect" class="shadow appearance-none border border-gray-700 rounded w-full py-2 px-3 bg-surface-dark leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="investors">Investors</option>
-                        <option value="developers">Developers</option>
-                        <option value="enterprise clients">Enterprise Clients</option>
-                    </select>
-                </div>
-                <button id="confirmRephraseBtn" class="btn-base btn-primary text-sm w-full">
-                    Rephrase Now
-                </button>
-            </div>
         </div>
     </div>
 
@@ -243,23 +284,14 @@
         const modalContent = document.getElementById('modalContent');
         const modalSpinner = document.getElementById('modalSpinner');
         const closeButton = apiResponseModal.querySelector('.close-button');
-        const rephraseMissionControls = document.getElementById('rephraseMissionControls');
-        const audienceSelect = document.getElementById('audienceSelect');
-        const confirmRephraseBtn = document.getElementById('confirmRephraseBtn');
-
-        let currentModalContext = ''; 
 
         closeButton.addEventListener('click', () => {
             apiResponseModal.style.display = 'none';
-            rephraseMissionControls.style.display = 'none';
-            currentModalContext = ''; 
         });
 
         window.addEventListener('click', (event) => {
             if (event.target === apiResponseModal) {
                 apiResponseModal.style.display = 'none';
-                rephraseMissionControls.style.display = 'none';
-                currentModalContext = '';
             }
         });
 
@@ -269,7 +301,6 @@
             modalContent.innerHTML = '';
             apiResponseModal.style.display = 'flex';
             modalSpinner.style.display = 'block';
-            rephraseMissionControls.style.display = 'none'; 
 
             const apiUrl = '/.netlify/functions/gemini';
 
@@ -298,44 +329,55 @@
                 modalContent.innerHTML = `<p style="color:var(--brand-orange)">Error: ${error.message}. Please try again.</p>`;
             } finally {
                 modalSpinner.style.display = 'none';
-                if (currentModalContext === 'rephraseMission') {
-                    rephraseMissionControls.style.display = 'block';
-                }
             }
         }
 
         // --- LLM Integration ---
-        document.getElementById('rephraseMissionBtn').addEventListener('click', () => {
-            currentModalContext = 'rephraseMission';
-            modalTitle.textContent = "Rephrase Mission Statement";
-            modalContent.innerHTML = "<p>Select an audience below to rephrase the mission statement:</p>";
-            apiResponseModal.style.display = 'flex';
-            rephraseMissionControls.style.display = 'block';
-        });
-
-        confirmRephraseBtn.addEventListener('click', async () => {
-            const missionStatement = document.getElementById('missionStatement').innerText;
-            const audience = audienceSelect.value;
-            const prompt = `Rephrase the following mission statement for a ${audience} audience, keeping it concise and impactful:\n\n"${missionStatement}"`;
-            modalContent.innerHTML = ''; 
-            await callGeminiAPI(prompt, `Mission for ${audience.charAt(0).toUpperCase() + audience.slice(1)}`);
-        });
-
         document.querySelectorAll('.generate-qna-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const sectionId = button.dataset.section;
-                const sectionElement = document.getElementById(sectionId);
                 let sectionContent = '';
                 let sectionTitle = '';
 
-                if (sectionElement) {
-                    sectionContent = sectionElement.innerText.replace(/✨ Generate Quick Q&A/g, '').trim();
-                    const h2Element = sectionElement.querySelector('h2');
-                    sectionTitle = h2Element ? h2Element.innerText.replace(':', '') : sectionId.replace(/-/g, ' ').toUpperCase();
+                if (sectionId === 'all-sections') {
+                    // Collect content from all relevant sections for a broader Q&A
+                    const introElement = document.getElementById('intro');
+                    const researchElement = document.getElementById('research-deep-dive');
+                    const pillarsElement = document.getElementById('pillars');
+
+                    // Extract text content carefully, excluding buttons and specific styling tags if needed
+                    // For the intro, combine the list items' text
+                    let introText = '';
+                    introElement.querySelectorAll('.content-list li').forEach(item => {
+                        introText += item.textContent + '\n';
+                    });
+                    introContent = introText.trim();
+                    
+                    const researchContent = researchElement.innerText.replace(/Got a Question\? Ask Our AI/g, '').trim();
+                    const pillarsContent = pillarsElement.innerText.replace(/Got a Question\? Ask Our AI/g, '').trim();
+                    
+                    sectionContent = `Introduction:\n${introContent}\n\nResearch & Deep Dive:\n${researchContent}\n\nPillars:\n${pillarsContent}`;
+                    sectionTitle = "The Entire Report";
+                } else {
+                    // This 'else' block is now effectively unused with only one button, but kept for robustness
+                    const sectionElement = document.getElementById(sectionId);
+                    if (sectionElement) {
+                        if (sectionId === 'intro') {
+                            const listItems = sectionElement.querySelectorAll('.content-list li');
+                            listItems.forEach(item => {
+                                sectionContent += item.textContent + '\n';
+                            });
+                            sectionContent = sectionContent.trim();
+                        } else {
+                            sectionContent = sectionElement.innerText.replace(/Got a Question\? Ask Our AI/g, '').trim(); 
+                        }
+                        const h2Element = sectionElement.querySelector('h2');
+                        sectionTitle = h2Element ? h2Element.innerText.replace(':', '') : sectionId.replace(/-/g, ' ').toUpperCase();
+                    }
                 }
 
-                const prompt = `Generate 3-5 key questions and their answers based on the following content from the "${sectionTitle}" section of a strategic report about theBlockchain.ai. Focus on the most important concepts and takeaways. Format as a numbered list of Q&A pairs with bolded questions:\n\nContent:\n${sectionContent}`;
-                callGeminiAPI(prompt, `Quick Q&A: ${sectionTitle}`);
+                const prompt = `Generate 3-5 key questions and their answers based on the following content from ${sectionTitle} of a strategic report about theBlockchain.ai. Focus on the most important concepts and takeaways. Format as a numbered list of Q&A pairs with bolded questions:\n\nContent:\n${sectionContent}`;
+                callGeminiAPI(prompt, `AI Insights for: ${sectionTitle}`);
             });
         });
     });
