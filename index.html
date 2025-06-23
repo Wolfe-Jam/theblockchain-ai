@@ -84,7 +84,7 @@
             left: 0;
             width: 100%;
             height: 50%;
-            background: linear-gradient(to top, var(--brand-cyan) 0%, var(--brand-blue) 100%);
+            background: linear-gradient(to top, #ffffff 0%, var(--brand-cyan) 100%);
             z-index: 1;
         }
         .sun-glow {
@@ -162,18 +162,28 @@
             bottom: 120%;
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(2px);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 500;
+            font-size: 0.9rem; 
+            font-weight: 600;
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease;
             pointer-events: none;
         }
+        
+        .boat:nth-child(3) .tooltip {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            color: var(--brand-orange);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 5px rgba(255, 145, 77, 0.5);
+        }
+
         .boat:hover .tooltip {
             opacity: 1;
             visibility: visible;
@@ -185,23 +195,31 @@
             transform: translateX(-50%);
             z-index: 10;
             text-align: center;
-            color: white;
+            cursor: pointer;
         }
         .main-title {
             font-family: 'Roboto Mono', monospace;
             font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: -0.025em;
-            color: #e0f2fe;
-            text-shadow: 0 0 5px rgba(125, 211, 252, 0.5), 0 0 10px rgba(0,0,0,0.7);
+            color: rgba(255, 255, 255, 0.3); /* Initial transparent state */
+            transition: color 0.4s ease, text-shadow 0.4s ease;
         }
         .sub-title {
             font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 400;
+            font-size: 1rem; /* 10% smaller */
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.4s ease 0.2s; /* Delayed appearance */
+        }
+        .title-container:hover .main-title {
+            color: white;
+            text-shadow: 0 0 8px rgba(255, 145, 77, 0.8); /* Backlit effect */
+        }
+        .title-container:hover .sub-title {
             opacity: 0.9;
-            margin-top: 0.25rem;
-            text-shadow: 0 1px 5px rgba(0,0,0,0.7);
         }
         .cta-button {
             display: inline-block;
@@ -211,23 +229,25 @@
             border-radius: 9999px;
             text-decoration: none;
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            border: 2px solid transparent;
         }
-        .cta-button-orange {
-            background-color: var(--brand-orange); 
-            box-shadow: 0 4px 15px rgba(255, 145, 77, 0.4);
+        .cta-button-transparent {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
         }
-        .cta-button-orange:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 145, 77, 0.6);
+        .cta-button-transparent.orange-border {
+            border-color: var(--brand-orange);
         }
-         .cta-button-blue {
-            background-color: var(--brand-blue); 
-            box-shadow: 0 4px 15px rgba(0, 74, 174, 0.4);
+        .cta-button-transparent.orange-border:hover {
+            background-color: rgba(255, 145, 77, 0.2);
         }
-        .cta-button-blue:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 74, 174, 0.6);
+        .cta-button-transparent.blue-border {
+            border-color: var(--brand-blue);
         }
+        .cta-button-transparent.blue-border:hover {
+             background-color: rgba(0, 74, 174, 0.2);
+        }
+
         .scroll-down {
             position: absolute;
             bottom: 2rem;
@@ -268,7 +288,7 @@
             border-radius: 0.5rem;
             margin-bottom: 1rem;
             overflow: hidden;
-            border: 1px solid #334155;
+            border: 1px solid transparent;
         }
         .accordion-header {
             padding: 1.5rem;
@@ -277,6 +297,7 @@
             justify-content: space-between;
             align-items: center;
             color: white;
+            backdrop-filter: blur(5px);
         }
          .accordion-header h2 {
             font-size: 1.25rem;
@@ -310,15 +331,17 @@
             transition: transform 0.3s ease;
         }
         
-        .problem-accordion .accordion-header { background-color: #1e293b; }
-        .problem-accordion .accordion-content { background-color: #0f172a; }
+        .problem-accordion { border-color: rgba(30, 41, 59, 0.8); }
+        .problem-accordion .accordion-header { background-color: rgba(30, 41, 59, 0.8); }
+        .problem-accordion .accordion-content { background-color: #0f172a; } 
         .problem-accordion .accordion-content ul li::before {
             content: '❌';
             position: absolute;
             left: 0;
             font-size: 1.25rem;
         }
-        .solution-accordion .accordion-header { background-color: var(--brand-blue); }
+        .solution-accordion { border-color: rgba(0, 74, 174, 0.8); }
+        .solution-accordion .accordion-header { background-color: rgba(0, 74, 174, 0.8); }
         .solution-accordion .accordion-content { background-color: #002d6b; } 
         .solution-accordion .accordion-content ul li::before {
             content: '✅';
@@ -326,13 +349,21 @@
             left: 0;
             font-size: 1.25rem;
         }
-        .highlight-problem {
-            color: var(--brand-orange);
-            text-shadow: 0 0 8px rgba(255, 145, 77, 0.5);
+        h2 .highlight-problem {
+            color: var(--brand-cyan);
+            text-shadow: 0 0 8px rgba(12, 192, 223, 0.5);
         }
-        .highlight-solution {
+        h2 .highlight-trust {
+             color: var(--brand-orange);
+             text-shadow: 0 0 8px rgba(255, 145, 77, 0.5);
+        }
+        h2 .highlight-solution-cyan {
             color: var(--brand-cyan);
             text-shadow: 0 0 8px rgba(12, 192, 223, 0.6);
+        }
+        h2 .highlight-solution-orange {
+            color: var(--brand-orange);
+            text-shadow: 0 0 8px rgba(255, 145, 77, 0.6);
         }
         .term {
             font-weight: 700;
@@ -347,15 +378,21 @@
             border: 2px solid var(--brand-cyan);
             background-color: rgba(12, 192, 223, 0.1);
             border-radius: 0.75rem;
-            padding: 1.5rem;
+            padding: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             text-align: center;
             color: #e0f2fe;
         }
-        .founder-promo-box strong {
-            color: white;
+        .founder-promo-box p {
+            margin: 0.25rem 0;
+        }
+        .limited-spots-link {
+            font-weight: 700;
+            color: var(--brand-cyan);
+            cursor: pointer;
+            text-decoration: underline;
         }
         
         /* Footer Styles */
@@ -420,23 +457,23 @@
         <div class="boats-container">
             <div class="boat" onclick="scrollToFacts()">
                 <i class="fas fa-sailboat"></i>
-                <div class="tooltip">The Problem</div>
+                <div class="tooltip">Drifting</div>
             </div>
             <div class="boat" onclick="scrollToFacts()">
                 <i class="fas fa-sailboat"></i>
-                <div class="tooltip">The Problem</div>
+                <div class="tooltip" style="color: var(--brand-cyan);">Lacking</div>
             </div>
             <div class="boat" onclick="scrollToFacts()">
                 <i class="fas fa-sailboat"></i>
-                <div class="tooltip">The Problem</div>
+                <div class="tooltip" style="background-color: rgba(255, 255, 255, 0.9); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); color: var(--brand-orange); text-shadow: 0 0 5px rgba(255, 145, 77, 0.5);">TRUST</div>
             </div>
             <div class="boat" onclick="scrollToFacts()">
                 <i class="fas fa-sailboat"></i>
-                <div class="tooltip">The Solution</div>
+                <div class="tooltip" style="color: var(--brand-cyan);">Broken</div>
             </div>
             <div class="boat" onclick="scrollToFacts()">
                 <i class="fas fa-sailboat"></i>
-                <div class="tooltip">The Solution</div>
+                <div class="tooltip">Lost</div>
             </div>
         </div>
         <div class="title-container">
@@ -487,7 +524,7 @@
 
             <div class="accordion-item problem-accordion">
                 <div class="accordion-header">
-                    <h2>Fact 3 | Code <span class="highlight-problem">Lacks</span> Verifiable <span class="highlight-problem">Trust</span> and Ownership.</h2>
+                    <h2>Fact 3 | Code <span class="highlight-problem">Lacks</span> Verifiable <span class="highlight-trust">Trust</span> and Ownership.</h2>
                     <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="accordion-content">
@@ -505,7 +542,7 @@
 
             <div class="accordion-item solution-accordion">
                 <div class="accordion-header">
-                    <h2>Fact 4 | A <span class="highlight-solution">Win/Win/Win</span> for the Entire Ecosystem.</h2>
+                    <h2>Fact 4 | A <span class="highlight-solution-cyan">Win/Win/Win</span> for the Entire Ecosystem.</h2>
                     <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="accordion-content">
@@ -521,7 +558,7 @@
 
             <div class="accordion-item solution-accordion">
                 <div class="accordion-header">
-                    <h2>Fact 5 | Our Unfair Advantage is <span class="highlight-solution">TRUST!</span></h2>
+                    <h2>Fact 5 | Our Unfair Advantage is <span class="highlight-solution-orange">TRUST!</span></h2>
                      <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="accordion-content">
@@ -539,12 +576,14 @@
                  <h2 class="text-3xl font-extrabold text-center mb-6 text-white">Ready to Build the Future of Trusted AI?</h2>
                  
                  <div class="founder-promo-box my-8">
-                     <p><i class="fas fa-rocket mr-2"></i><strong>Founder's Program:</strong> Onboard before <strong>July 31st, 2025</strong> to claim your Founder's Stake. Spots are limited.</p>
+                     <p class="font-bold text-lg"><i class="fas fa-rocket mr-2"></i>Founder's Program: to claim your Founder's Stake.</p>
+                     <p class="mt-2">Onboard before <strong>July 31st, 2025</strong></p>
+                     <p class="text-sm mt-1"><button id="spotsLimitedBtn" class="limited-spots-link">Spots are limited.</button></p>
                  </div>
                  
                 <div class="flex justify-center items-center space-x-4">
-                    <a href="report.html" class="cta-button cta-button-orange">Deep Dive</a>
-                    <button id="registerBtn" class="cta-button cta-button-blue">Register Interest</button>
+                    <a href="report.html" class="cta-button cta-button-transparent blue-border">Deep Dive</a>
+                    <button id="registerBtn" class="cta-button cta-button-transparent orange-border">Register Interest</button>
                 </div>
             </div>
 
@@ -557,7 +596,7 @@
             <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
             <div id="registerForm">
                 <h3 class="modal-title text-2xl font-bold mb-4" style="color: var(--brand-cyan);">Join the Founder's Program</h3>
-                <p class="mb-6 text-slate-300">Get early access, claim your Founder's Stake, and help shape the future of open-source [with Trusted AI].</p>
+                <p class="mb-6 text-slate-300">Get early access, claim your Founder's Stake, and help shape the future of open-source with Trusted AI.</p>
                 <form name="register" method="POST" data-netlify="true">
                     <input type="hidden" name="form-name" value="register">
                     <div class="mb-4">
@@ -614,6 +653,7 @@
                         }
                     })
 
+                    // Toggle the clicked accordion
                     accordionItem.classList.toggle('active');
                 });
             });
@@ -621,14 +661,18 @@
             // Registration Modal Logic
             const registerModal = document.getElementById('registerModal');
             const registerBtn = document.getElementById('registerBtn');
+            const spotsLimitedBtn = document.getElementById('spotsLimitedBtn');
             const closeModalBtn = document.getElementById('closeModalBtn');
             const registerFormDiv = document.getElementById('registerForm');
             const thankYouMessage = document.getElementById('thankYouMessage');
             const form = document.querySelector('form[name="register"]');
 
-            registerBtn.addEventListener('click', () => {
-                registerModal.style.display = 'flex';
-            });
+            const openRegisterModal = () => {
+                 registerModal.style.display = 'flex';
+            }
+
+            registerBtn.addEventListener('click', openRegisterModal);
+            spotsLimitedBtn.addEventListener('click', openRegisterModal);
 
             closeModalBtn.addEventListener('click', () => {
                 registerModal.style.display = 'none';
