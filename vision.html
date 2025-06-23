@@ -3,27 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>theBlockchain.ai - Vision</title>
+    <!-- Page Title: This text appears in the browser tab -->
+    <title>The Future of Open Source is Trusted AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Tailwind CSS CDN - Added to match report.html functionality -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Official Brand Colors from report.html */
+        :root {
+            --brand-orange: #FF914D; /* Reverted to original brand orange */
+            --brand-cyan: #0CC0DF;   /* Digital Turquoise */
+            --brand-blue: #004AAE;   /* Blockchain Blue */
+        }
+
         /* --- Base & New Header Styles --- */
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            background-color: #0d1117; /* Dark background */
-            color: #c9d1d9; /* Light text */
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A; /* Dark background from report.html */
+            color: #F8FAFC; /* Light text from report.html */
             line-height: 1.7;
-            padding-top: 60px; /* To avoid content going under the fixed header */
+            padding-top: 80px; /* To avoid content going under the fixed header from report.html */
         }
+        h1, h2, h3, h4 {
+            color: #F8FAFC;
+        }
+
+        /* Header Styles from report.html */
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
+            z-index: 50; /* Z-index from report.html */
             background-color: rgba(0, 0, 0, 0.7); /* Black with transparency */
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(51, 65, 85, 0.5);
@@ -37,14 +51,17 @@
             margin: 0 auto;
         }
         .nav-brand {
+            display: flex;
+            align-items: center;
             font-family: 'Roboto Mono', monospace;
             font-weight: 700;
             font-size: 1.25rem;
             text-decoration: none;
             color: white;
         }
+        /* Removed specific CSS for .nav-brand img as Tailwind classes will handle it */
         .nav-links a {
-            color: #cbd5e1;
+            color: #cbd5e1; /* Slate 300 */
             text-decoration: none;
             font-weight: 500;
             margin-left: 2rem;
@@ -54,7 +71,7 @@
             color: white;
         }
 
-        /* --- Original Content Styles --- */
+        /* --- Original Content Styles with updated colors --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -71,18 +88,23 @@
         }
         .hero p {
             font-size: 1.25rem;
-            color: #8b949e;
+            color: #94a3b8; /* Adjusted to a lighter gray for contrast */
         }
         .section {
-            background-color: #161b22;
+            background-color: #1E293B; /* Card background from report.html */
             padding: 3rem 2rem;
             margin-bottom: 2rem;
-            border-radius: 8px;
-            border: 1px solid #30363d;
+            border-radius: 0.75rem; /* Rounded corners from report.html */
+            box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3); /* Shadow from report.html */
+            transition: transform 0.3s, box-shadow 0.3s; /* Transition from report.html */
+        }
+        .section:hover { /* Hover effect from report.html */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
         }
         .section-title {
             font-size: 2.25rem;
-            color: #ffffff;
+            color: #F8FAFC; /* Light text */
             margin-bottom: 2rem;
             text-align: center;
             font-weight: 600;
@@ -94,13 +116,14 @@
             gap: 2rem;
         }
         .feature-card {
-            background-color: #0d1117;
+            background-color: #0F172A; /* Body background color for card inner */
             padding: 2rem;
-            border-radius: 6px;
-            border: 1px solid #30363d;
+            border-radius: 0.5rem; /* Slightly smaller rounded corners */
+            border: 1px solid #334155; /* Slate 700 for border */
             border-left-width: 4px;
             text-align: center;
             flex-basis: 300px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Smaller shadow for inner cards */
         }
         .feature-card h3 {
             margin-top: 0;
@@ -108,21 +131,24 @@
         }
         .feature-card p {
             text-align: left;
+            color: #CBD5E1; /* Slate 300 */
         }
         .feature-card strong {
-            color: #c9d1d9;
+            color: #E2E8F0; /* Lighter text for strong tags */
         }
         .icon-container {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
-        .card-red { border-left-color: #ff4d4d; }
-        .card-red h3, .problem-red, .icon-red { color: #ff4d4d; }
-        .card-green { border-left-color: #3fb950; }
-        .card-green h3, .problem-green, .icon-green { color: #3fb950; }
-        .card-blue { border-left-color: #58a6ff; }
-        .card-blue h3, .problem-blue, .icon-blue { color: #58a6ff; }
-        .icon-gold { color: #ffd700; }
+        /* Using brand colors for specific cards */
+        .card-red { border-left-color: var(--brand-orange); }
+        .card-red h3, .problem-red, .icon-red { color: var(--brand-orange); }
+        .card-green { border-left-color: var(--brand-cyan); }
+        .card-green h3, .problem-green, .icon-green { color: var(--brand-cyan); }
+        .card-blue { border-left-color: var(--brand-blue); }
+        .card-blue h3, .problem-blue, .icon-blue { color: var(--brand-blue); }
+        .icon-gold { color: #FFD700; } /* Gold color for specific icon */
+
         .usp {
             font-style: italic;
             display: block;
@@ -132,56 +158,61 @@
             padding-left: 1rem;
             text-align: left;
         }
-        .card-red .usp { color: #ff4d4d; border-left-color: #ff4d4d; }
-        .card-green .usp { color: #3fb950; border-left-color: #3fb950; }
-        .card-blue .usp { color: #58a6ff; border-left-color: #58a6ff; }
+        .card-red .usp { color: var(--brand-orange); border-left-color: var(--brand-orange); }
+        .card-green .usp { color: var(--brand-cyan); border-left-color: var(--brand-cyan); }
+        .card-blue .usp { color: var(--brand-blue); border-left-color: var(--brand-blue); }
+
         .vertical-container, .rollout-timeline {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
         .problem-box, .rollout-phase {
-            background-color: #0d1117;
+            background-color: #0F172A; /* Body background color for inner elements */
             padding: 1.5rem;
-            border-radius: 6px;
+            border-radius: 0.5rem;
             border-left-width: 4px;
             border-left-style: solid;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Smaller shadow */
         }
         .problem-box p, .rollout-phase h4 {
             margin-top: 0;
-            color: #ffffff;
+            color: #F8FAFC;
             font-size: 1.1rem;
             font-weight: 500;
         }
         .rollout-phase p {
             margin: 0;
             text-align: left;
+            color: #CBD5E1;
         }
-        .problem-box.card-red { border-left-color: #ff4d4d; }
-        .problem-box.card-green { border-left-color: #3fb950; }
-        .problem-box.card-blue { border-left-color: #58a6ff; }
-        .rollout-phase.card-red { border-left-color: #ff4d4d; }
-        .rollout-phase.card-red h4 { color: #ff4d4d; }
-        .rollout-phase.card-green { border-left-color: #3fb950; }
-        .rollout-phase.card-green h4 { color: #3fb950; }
-        .rollout-phase.card-blue { border-left-color: #58a6ff; }
-        .rollout-phase.card-blue h4 { color: #58a6ff; }
+        .problem-box.card-red { border-left-color: var(--brand-orange); }
+        .problem-box.card-green { border-left-color: var(--brand-cyan); }
+        .problem-box.card-blue { border-left-color: var(--brand-blue); }
+        .rollout-phase.card-red { border-left-color: var(--brand-orange); }
+        .rollout-phase.card-red h4 { color: var(--brand-orange); }
+        .rollout-phase.card-green { border-left-color: var(--brand-cyan); }
+        .rollout-phase.card-green h4 { color: var(--brand-cyan); }
+        .rollout-phase.card-blue { border-left-color: var(--brand-blue); }
+        .rollout-phase.card-blue h4 { color: var(--brand-blue); }
+        
         #investors .section-title {
-             color: #3fb950;
+             color: var(--brand-cyan); /* Using brand-cyan for investors section title */
         }
         .opportunity-knocks {
             text-align: center;
             font-size: 1.75rem;
-            color: #3fb950;
+            color: var(--brand-cyan); /* Using brand-cyan */
             font-weight: 600;
             margin: 3rem 0;
         }
         .call-to-action {
             margin-top: 2rem;
-            background-color: #043028;
-            border: 1px solid #3fb950;
+            background-color: #0d1117; /* Darker background for CTA */
+            border: 1px solid var(--brand-cyan); /* Cyan border */
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.4);
         }
         
         /* Footer Styles */
@@ -199,7 +230,11 @@
 
     <header>
         <nav>
-            <a href="index.html" class="nav-brand">theBlockchain.ai</a>
+            <a href="index.html" class="nav-brand">
+                <!-- Logo from report.html - Added Tailwind classes h-8 w-auto mr-3 -->
+                <img src="https://raw.githubusercontent.com/Wolfe-Jam/theblockchain-ai/main/Public/theBlockchain-ai-crop-sml.svg" alt="Logo" class="h-8 w-auto mr-3">
+                <span>theBlockchain.ai</span>
+            </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="vision.html">Vision</a>
@@ -211,7 +246,7 @@
 
     <div class="container">
         <section class="hero">
-            <h2>The Future of Artificial Intelligence</h2>
+            <h2>Where Open Source meets Trusted AI - the Win/Win/Win</h2>
             <p>A transparent, secure, and collaborative ecosystem where AI's true potential is unlocked on the blockchain.</p>
         </section>
 
@@ -220,14 +255,14 @@
             <div class="feature-grid">
                 <div class="feature-card card-red">
                     <div class="icon-container"><i class="fa-solid fa-code icon-red"></i></div>
-                    <h3>For AI Developers</h3>
+                    <h3>For Developers</h3>
                     <p><strong>Value:</strong> Direct monetization and control over your intellectual property.</p>
                     <p><strong>Benefit:</strong> Set your own prices and automate payments with smart contracts.</p>
                     <span class="usp">"Your AI, your rules, your revenue."</span>
                 </div>
                 <div class="feature-card card-green">
                     <div class="icon-container"><i class="fa-solid fa-chart-line icon-green"></i></div>
-                    <h3>For Businesses & Researchers</h3>
+                    <h3>For Commerce</h3>
                     <p><strong>Value:</strong> Access a diverse and validated pool of AI resources.</p>
                     <p><strong>Benefit:</strong> Acquire trustworthy AI models with clear performance history.</p>
                     <span class="usp">"Trustworthy AI on demand."</span>
@@ -246,12 +281,12 @@
             <h2 class="section-title">The Core Vision</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="icon-container"><i class="fa-solid fa-file-contract" style="color: #79c0ff;"></i></div>
+                    <div class="icon-container"><i class="fa-solid fa-file-contract" style="color: var(--brand-blue);"></i></div>
                     <h3>Verifiable & Auditable AI</h3>
                     <p>Establish the gold standard for ethical AI with an unchangeable record of any model's lifecycle.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="icon-container"><i class="fa-solid fa-share-nodes" style="color: #79c0ff;"></i></div>
+                    <div class="icon-container"><i class="fa-solid fa-share-nodes" style="color: var(--brand-cyan);"></i></div>
                     <h3>Secure Federated Learning</h3>
                     <p>Enable collaborative intelligence without centralized data pooling to build powerful models.</p>
                 </div>
@@ -280,7 +315,7 @@
             <h2 class="section-title">For Our Future Partners & Investors</h2>
             
             <h3 style="text-align:center; color: #ffffff;">The Opportunity: A Broken, Centralized AI Market</h3>
-            <p style="text-align:center; max-width: 800px; margin: 0 auto 2rem auto; color: #8b949e;">The rapid growth of AI is built on a fragile foundation, presenting a massive market opportunity for a decentralized alternative.</p>
+            <p style="text-align:center; max-width: 800px; margin: 0 auto 2rem auto; color: #94a3b8;">The rapid growth of AI is built on a fragile foundation, presenting a massive market opportunity for a decentralized alternative.</p>
             
             <div class="vertical-container">
                 <div class="problem-box card-red">
@@ -299,7 +334,7 @@
             <h3 style="text-align:center; color: #ffffff; margin-top: 3rem;">Our Strategic Advantage (The Moat)</h3>
             <div class="feature-grid" style="margin-top: 2rem;">
                 <div class="feature-card">
-                    <div class="icon-container"><i class="fa-solid fa-magnet icon-red"></i></div>
+                    <div class="icon-container"><i class="fa-solid fa-magnet icon-red" style="color: #FF4D4D;"></i></div>
                     <h4>Powerful Network Effects</h4>
                     <p>More developers attract more businesses, which require more data—creating a self-reinforcing flywheel.</p>
                 </div>
@@ -318,7 +353,7 @@
             <div class="call-to-action">
                 <h3 style="text-align:center; color: #ffffff;">Join Us in Building the Future</h3>
                 <p style="text-align:center;">We are currently raising our seed round to accelerate development and capture the first-mover advantage. For a detailed prospectus and to speak with the founders, please contact us.</p>
-                <p style="text-align:center; font-size: 1.5rem; color: #ffffff; font-weight: bold; margin-top: 1rem;">invest@theblockchain.ai</p>
+                <p style="text-align:center; font-size: 1.5rem; color: #ffffff; font-weight: bold; margin-top: 1rem;"><a href="mailto:invest@theblockchain.ai" style="color: inherit; text-decoration: none;">invest@theblockchain.ai</a></p>
             </div>
         </section>
 
