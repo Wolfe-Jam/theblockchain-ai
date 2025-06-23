@@ -257,8 +257,8 @@
         </section>
         
         <div class="flex justify-center mt-16 mb-8">
-            <button class="generate-qna-btn btn-base btn-accent" data-section="all-sections">
-                Got a Question? Ask Our AI
+            <button id="askAiButton" class="btn-base btn-accent">
+                Ask AI
             </button>
         </div>
 
@@ -272,6 +272,10 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3 id="modalTitle" class="text-2xl font-bold" style="color: var(--brand-cyan)"></h3>
+            <div id="aiQuestionInputContainer" class="mt-4 mb-4">
+                <textarea id="aiQuestionInput" rows="3" class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:border-cyan-500" placeholder="Type your question about the report here..."></textarea>
+                <button id="submitAiQuestion" class="mt-2 btn-base btn-primary">Submit Question</button>
+            </div>
             <div class="loading-spinner" id="modalSpinner"></div>
             <div id="modalContent" class="leading-relaxed mt-4"></div>
         </div>
@@ -281,104 +285,93 @@
     document.addEventListener('DOMContentLoaded', () => {
         const apiResponseModal = document.getElementById('apiResponseModal');
         const modalTitle = document.getElementById('modalTitle');
+        const aiQuestionInputContainer = document.getElementById('aiQuestionInputContainer');
+        const aiQuestionInput = document.getElementById('aiQuestionInput');
+        const submitAiQuestion = document.getElementById('submitAiQuestion');
         const modalContent = document.getElementById('modalContent');
         const modalSpinner = document.getElementById('modalSpinner');
         const closeButton = apiResponseModal.querySelector('.close-button');
+        const askAiButton = document.getElementById('askAiButton'); // Get the main trigger button
+
+        // *** IMPORTANT: REMOVE ALL STATIC EMBEDDED CONTENT HERE ***
+        //
+        // The content from vision.html, forDevsContent, forInvestorsContent,
+        // faqContent, glossaryContent, etc., will now be fetched by the
+        // Netlify Function on the backend from your private GitHub repo.
+        // So, these JavaScript variables are no longer needed here.
+        // Keep this script clean for better performance and privacy.
+        //
 
         closeButton.addEventListener('click', () => {
             apiResponseModal.style.display = 'none';
+            aiQuestionInput.value = ''; // Clear input on close
+            modalContent.innerHTML = ''; // Clear previous AI response
+            aiQuestionInputContainer.style.display = 'block'; // Show input for next time
         });
 
         window.addEventListener('click', (event) => {
             if (event.target === apiResponseModal) {
                 apiResponseModal.style.display = 'none';
+                aiQuestionInput.value = ''; // Clear input on close
+                modalContent.innerHTML = ''; // Clear previous AI response
+                aiQuestionInputContainer.style.display = 'block'; // Show input for next time
             }
         });
 
-        // UPDATED SECURE API CALL FUNCTION
-        async function callGeminiAPI(prompt, titleText) {
-            modalTitle.textContent = titleText;
-            modalContent.innerHTML = '';
-            apiResponseModal.style.display = 'flex';
-            modalSpinner.style.display = 'block';
+        // --- NEW callGeminiAPI FUNCTION - Now calls Netlify Function ---
+        async function callGeminiAPI(userQuestion) {
+            modalTitle.textContent = `AI Insights for: "${userQuestion}"`; // Dynamically set title based on user question
+            modalContent.innerHTML = ''; // Clear previous content
+            modalSpinner.style.display = 'block'; // Show spinner
+            aiQuestionInputContainer.style.display = 'none'; // Hide input while processing
 
-            const apiUrl = '/.netlify/functions/gemini';
+            // The endpoint for your Netlify Function
+            const netlifyFunctionUrl = '/.netlify/functions/ask-ai'; 
 
             try {
-                const response = await fetch(apiUrl, {
+                const response = await fetch(netlifyFunctionUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: prompt })
+                    body: JSON.stringify({ userQuestion: userQuestion }) // Send only the user's question
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Error from server: ${response.statusText}`);
+                    const errorData = await response.json();
+                    throw new Error(`Server error (${response.status}): ${errorData.message || 'Unknown error'}`);
                 }
                 
                 const result = await response.json();
 
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text; 
-                    modalContent.innerHTML = text.replace(/\n/g, '<br>');
+                if (result.answer) {
+                    modalContent.innerHTML = result.answer.replace(/\n/g, '<br>');
                 } else {
-                    modalContent.innerHTML = '<p style="color:var(--brand-orange)">Error: No content received from LLM.</p>';
+                    modalContent.innerHTML = '<p style="color:var(--brand-orange)">Error: No answer received from AI. Please try a different question.</p>';
                 }
             } catch (error) {
-                modalContent.innerHTML = `<p style="color:var(--brand-orange)">Error: ${error.message}. Please try again.</p>`;
+                modalContent.innerHTML = `<p style="color:var(--brand-orange)">Error: ${error.message}. Please check your Netlify function logs.</p>`;
             } finally {
-                modalSpinner.style.display = 'none';
+                modalSpinner.style.display = 'none'; // Hide spinner
             }
         }
 
-        // --- LLM Integration ---
-        document.querySelectorAll('.generate-qna-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const sectionId = button.dataset.section;
-                let sectionContent = '';
-                let sectionTitle = '';
+        // --- Event Listener for Main "Ask AI" button ---
+        askAiButton.addEventListener('click', () => {
+            modalTitle.textContent = "Ask AI a Question"; // Still show full title in modal for input
+            aiQuestionInputContainer.style.display = 'block'; // Ensure input is visible
+            modalContent.innerHTML = ''; // Clear previous AI answer
+            apiResponseModal.style.display = 'flex'; // Show the modal
+        });
 
-                if (sectionId === 'all-sections') {
-                    // Collect content from all relevant sections for a broader Q&A
-                    const introElement = document.getElementById('intro');
-                    const researchElement = document.getElementById('research-deep-dive');
-                    const pillarsElement = document.getElementById('pillars');
+        // --- Event Listener for "Submit Question" button in modal ---
+        submitAiQuestion.addEventListener('click', () => {
+            const userQuestion = aiQuestionInput.value.trim();
+            if (!userQuestion) {
+                modalContent.innerHTML = '<p style="color:var(--brand-orange)">Please enter a question.</p>';
+                return;
+            }
 
-                    // Extract text content carefully, excluding buttons and specific styling tags if needed
-                    // For the intro, combine the list items' text
-                    let introText = '';
-                    introElement.querySelectorAll('.content-list li').forEach(item => {
-                        introText += item.textContent + '\n';
-                    });
-                    introContent = introText.trim();
-                    
-                    const researchContent = researchElement.innerText.replace(/Got a Question\? Ask Our AI/g, '').trim();
-                    const pillarsContent = pillarsElement.innerText.replace(/Got a Question\? Ask Our AI/g, '').trim();
-                    
-                    sectionContent = `Introduction:\n${introContent}\n\nResearch & Deep Dive:\n${researchContent}\n\nPillars:\n${pillarsContent}`;
-                    sectionTitle = "The Entire Report";
-                } else {
-                    // This 'else' block is now effectively unused with only one button, but kept for robustness
-                    const sectionElement = document.getElementById(sectionId);
-                    if (sectionElement) {
-                        if (sectionId === 'intro') {
-                            const listItems = sectionElement.querySelectorAll('.content-list li');
-                            listItems.forEach(item => {
-                                sectionContent += item.textContent + '\n';
-                            });
-                            sectionContent = sectionContent.trim();
-                        } else {
-                            sectionContent = sectionElement.innerText.replace(/Got a Question\? Ask Our AI/g, '').trim(); 
-                        }
-                        const h2Element = sectionElement.querySelector('h2');
-                        sectionTitle = h2Element ? h2Element.innerText.replace(':', '') : sectionId.replace(/-/g, ' ').toUpperCase();
-                    }
-                }
-
-                const prompt = `Generate 3-5 key questions and their answers based on the following content from ${sectionTitle} of a strategic report about theBlockchain.ai. Focus on the most important concepts and takeaways. Format as a numbered list of Q&A pairs with bolded questions:\n\nContent:\n${sectionContent}`;
-                callGeminiAPI(prompt, `AI Insights for: ${sectionTitle}`);
-            });
+            // Call the new callGeminiAPI which now hits your Netlify Function
+            callGeminiAPI(userQuestion);
         });
     });
     </script>
