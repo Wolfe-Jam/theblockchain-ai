@@ -9,7 +9,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/Wolfe-Jam/theblockchain-ai/main/Public/theBlockchain-ai-crop-sml.svg" type="image/svg+xml">
     <style>
+        :root {
+            --brand-blue: #004AAE;
+            --brand-cyan: #0CC0DF;
+            --brand-orange: #FF914D;
+        }
         html {
             scroll-behavior: smooth;
         }
@@ -44,6 +50,8 @@
             margin: 0 auto;
         }
         .nav-brand {
+            display: flex;
+            align-items: center;
             font-family: 'Roboto Mono', monospace;
             font-weight: 700;
             font-size: 1.25rem;
@@ -76,7 +84,7 @@
             left: 0;
             width: 100%;
             height: 50%;
-            background: linear-gradient(to top, #87CEEB 0%, #1E90FF 100%);
+            background: linear-gradient(to top, var(--brand-cyan) 0%, var(--brand-blue) 100%);
             z-index: 1;
         }
         .sun-glow {
@@ -86,7 +94,7 @@
             width: 100%;
             height: 100%;
             transform: translateX(-50%);
-            background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(255, 165, 0, 0.7) 0%, rgba(255, 215, 0, 0) 60%);
+            background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(255, 145, 77, 0.7) 0%, rgba(255, 145, 77, 0) 60%);
             z-index: 3;
         }
         .sun-disk {
@@ -96,9 +104,9 @@
             width: 150px;
             height: 150px;
             transform: translateX(-50%);
-            background: #FF8C00;
+            background: var(--brand-orange);
             border-radius: 50%;
-            box-shadow: 0 0 60px 30px #FF8C00, 0 0 100px 60px rgba(255, 140, 0, 0.7);
+            box-shadow: 0 0 60px 30px var(--brand-orange), 0 0 100px 60px rgba(255, 145, 77, 0.7);
             z-index: 2;
         }
         .ocean {
@@ -107,7 +115,7 @@
             left: 0;
             width: 100%;
             height: 50%;
-            background: linear-gradient(to top, #000000 0%, #191970 100%);
+            background: linear-gradient(to top, #000000 0%, var(--brand-blue) 100%);
             z-index: 2;
         }
         .horizon-line {
@@ -136,7 +144,6 @@
         }
         .boat {
             font-size: 1.75rem;
-            color: #1e293b;
             cursor: pointer;
             transition: transform 0.3s ease;
             position: relative;
@@ -144,6 +151,13 @@
         .boat:hover {
             transform: scale(1.2);
         }
+        /* Restored Boat Colors */
+        .boat:nth-child(1) { color: #555555; }
+        .boat:nth-child(2) { color: #444444; }
+        .boat:nth-child(3) { color: #333333; }
+        .boat:nth-child(4) { color: #444444; }
+        .boat:nth-child(5) { color: #555555; }
+
         .boat .tooltip {
             position: absolute;
             bottom: 120%;
@@ -192,18 +206,18 @@
         }
         .cta-button {
             display: inline-block;
-            background-color: #FF8C00;
+            background-color: var(--brand-orange); 
             color: white;
             font-weight: 600;
             padding: 0.75rem 2rem;
             border-radius: 9999px;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 145, 77, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.6);
+            box-shadow: 0 8px 25px rgba(255, 145, 77, 0.6);
         }
         .scroll-down {
             position: absolute;
@@ -235,35 +249,35 @@
             letter-spacing: -0.025em;
         }
         .problem-title {
-            color: #93c5fd; /* Light Blue */
+            color: var(--brand-cyan); 
         }
         .solution-title {
-            color: #fdba74; /* Light Orange */
+            color: var(--brand-orange);
             margin-top: 4rem;
         }
         .accordion-item {
-            border: 1px solid #334155; /* Slate 700 */
             border-radius: 0.5rem;
             margin-bottom: 1rem;
             overflow: hidden;
+            border: 1px solid #334155;
         }
         .accordion-header {
-            background-color: #1e293b; /* Slate 800 */
             padding: 1.5rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: white;
         }
          .accordion-header h2 {
             font-size: 1.25rem;
             font-weight: 600;
+            color: white;
         }
         .accordion-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            background-color: #0f172a; /* Slate 900 */
             padding: 0 1.5rem;
         }
         .accordion-content .content-wrapper {
@@ -277,15 +291,6 @@
             padding-left: 1.5rem;
             margin-bottom: 1rem;
         }
-        .accordion-content ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #22c55e; /* Green 500 */
-        }
-         .accordion-item.secondary .accordion-content ul li::before {
-            color: #fdba74; /* Light Orange */
-        }
         .accordion-item.active .accordion-content {
             max-height: 500px; /* Adjust as needed */
         }
@@ -295,27 +300,37 @@
         .icon {
             transition: transform 0.3s ease;
         }
-        .accordion-item.secondary .accordion-header {
-             background-color: #3f2112; /* Darker orange-brown */
-        }
-        .accordion-item.secondary .accordion-content {
-             background-color: #2c170d;
-        }
-        .highlight-problem {
+        
+        /* Accordion Color Styles */
+        .problem-accordion .accordion-header { background-color: #1e293b; }
+        .problem-accordion .accordion-content { background-color: #0f172a; }
+        .problem-accordion .accordion-content ul li::before {
+            content: '×';
             color: #fca5a5; /* Light Red */
-            text-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+        }
+        .solution-accordion .accordion-header { background-color: var(--brand-blue); }
+        .solution-accordion .accordion-content { background-color: #002d6b; } /* Darker Blue */
+        .solution-accordion .accordion-content ul li::before {
+            content: '✓';
+            color: var(--brand-cyan); /* Cyan */
+        }
+
+        /* Highlight Styles */
+        .highlight-problem {
+            color: var(--brand-orange);
+            text-shadow: 0 0 8px rgba(255, 145, 77, 0.5);
         }
         .highlight-solution {
-            color: #fdba74; /* Light Orange */
-            text-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+            color: var(--brand-cyan);
+            text-shadow: 0 0 8px rgba(12, 192, 223, 0.6);
         }
         .term {
             font-weight: 700;
             color: #f8fafc;
-            background-color: rgba(253, 186, 116, 0.2);
+            background-color: rgba(12, 192, 223, 0.2);
             padding: 0.1rem 0.4rem;
             border-radius: 0.25rem;
-            border: 1px solid rgba(253, 186, 116, 0.4);
+            border: 1px solid rgba(12, 192, 223, 0.4);
         }
         
         /* Footer Styles */
@@ -333,7 +348,10 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" class="nav-brand">theBlockchain.ai</a>
+            <a href="index.html" class="nav-brand">
+                <img src="https://raw.githubusercontent.com/Wolfe-Jam/theblockchain-ai/main/Public/theBlockchain-ai-crop-sml.svg" alt="Logo" class="h-8 w-auto mr-3">
+                <span>theBlockchain.ai</span>
+            </a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="vision.html">Vision</a>
@@ -386,9 +404,9 @@
             
             <h1 class="group-title problem-title">The Problem</h1>
             
-            <div class="accordion-item">
+            <div class="accordion-item problem-accordion">
                 <div class="accordion-header">
-                    <h2>Fact 1: The Foundation of the Digital World is <span class="highlight-problem">Broken</span>.</h2>
+                    <h2>Fact 1 | The Foundation of the Digital World is <span class="highlight-problem">Broken</span>.</h2>
                     <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="accordion-content">
@@ -402,9 +420,9 @@
                 </div>
             </div>
 
-            <div class="accordion-item">
+            <div class="accordion-item problem-accordion">
                 <div class="accordion-header">
-                    <h2>Fact 2: Value is <span class="highlight-problem">Trapped</span> and Unmonetized.</h2>
+                    <h2>Fact 2 | Value is <span class="highlight-problem">Trapped</span> and Unmonetized.</h2>
                     <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="accordion-content">
@@ -418,9 +436,9 @@
                 </div>
             </div>
 
-            <div class="accordion-item">
+            <div class="accordion-item problem-accordion">
                 <div class="accordion-header">
-                    <h2>Fact 3: Code Lacks Verifiable <span class="highlight-problem">Trust</span> and Ownership.</h2>
+                    <h2>Fact 3 | Code <span class="highlight-problem">Lacks</span> Verifiable <span class="highlight-problem">Trust</span> and Ownership.</h2>
                     <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="accordion-content">
@@ -436,9 +454,9 @@
 
             <h1 class="group-title solution-title">The Solution</h1>
 
-            <div class="accordion-item secondary">
+            <div class="accordion-item solution-accordion">
                 <div class="accordion-header">
-                    <h2>Fact 4: A <span class="highlight-solution">Win/Win/Win</span> for the Entire Ecosystem.</h2>
+                    <h2>Fact 4 | A <span class="highlight-solution">Win/Win/Win</span> for the Entire Ecosystem.</h2>
                     <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="accordion-content">
@@ -452,9 +470,9 @@
                 </div>
             </div>
 
-            <div class="accordion-item secondary">
+            <div class="accordion-item solution-accordion">
                 <div class="accordion-header">
-                    <h2>Fact 5: Our Unfair Advantage is <span class="highlight-solution">Trust</span>.</h2>
+                    <h2>Fact 5 | Our Unfair Advantage is <span class="highlight-solution">TRUST!</span></h2>
                      <i class="fas fa-chevron-down icon"></i>
                 </div>
                 <div class="accordion-content">
@@ -468,9 +486,9 @@
                 </div>
             </div>
 
-            <div class="text-center mt-12">
+            <div class="text-center mt-24"> <!-- Increased margin-top -->
                  <h2 class="text-3xl font-extrabold text-center mb-6 text-white">Ready to Build the Future of Trusted AI?</h2>
-                 <a href="report.html" class="cta-button">Deep Dive &rarr;</a>
+                 <a href="report.html" class="cta-button">Deep Dive</a>
             </div>
 
         </div>
