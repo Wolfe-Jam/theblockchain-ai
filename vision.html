@@ -3,42 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>theblockchain.ai - The Future of AI, Powered by Trust</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>theBlockchain.ai - Vision</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        /* --- CSS Styles for the Page --- */
+        /* --- Base & New Header Styles --- */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             background-color: #0d1117; /* Dark background */
             color: #c9d1d9; /* Light text */
             line-height: 1.7;
+            padding-top: 60px; /* To avoid content going under the fixed header */
         }
         header {
-            background: linear-gradient(90deg, #1f2a37, #111827);
-            color: #ffffff;
-            padding: 1rem;
-            text-align: center;
-            border-bottom: 1px solid #30363d;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Black with transparency */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
         }
-        header h1 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.75rem;
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
         }
-        nav a {
-            color: #58a6ff;
+        .nav-brand {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            font-size: 1.25rem;
             text-decoration: none;
-            margin: 0 0.75rem;
+            color: white;
+        }
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
             font-weight: 500;
+            margin-left: 2rem;
             transition: color 0.3s ease;
         }
-        nav a:hover {
-            color: #79c0ff;
+        .nav-links a:hover {
+            color: white;
         }
+
+        /* --- Original Content Styles --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -84,8 +100,7 @@
             border: 1px solid #30363d;
             border-left-width: 4px;
             text-align: center;
-            flex-basis: 300px; /* Base width for each card */
-            /* REMOVED flex-grow: 1; to prevent stretching */
+            flex-basis: 300px;
         }
         .feature-card h3 {
             margin-top: 0;
@@ -97,37 +112,17 @@
         .feature-card strong {
             color: #c9d1d9;
         }
-        
-        /* --- Icon Styles --- */
         .icon-container {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
-
-        /* --- RGB & Thematic Color Scheme --- */
         .card-red { border-left-color: #ff4d4d; }
         .card-red h3, .problem-red, .icon-red { color: #ff4d4d; }
-        .problem-box.card-red { border-left-color: #ff4d4d; }
-        .card-red .usp { color: #ff4d4d; border-left-color: #ff4d4d; }
-        .rollout-phase.card-red { border-left-color: #ff4d4d; }
-        .rollout-phase.card-red h4 { color: #ff4d4d; }
-
         .card-green { border-left-color: #3fb950; }
         .card-green h3, .problem-green, .icon-green { color: #3fb950; }
-        .problem-box.card-green { border-left-color: #3fb950; }
-        .card-green .usp { color: #3fb950; border-left-color: #3fb950; }
-        .rollout-phase.card-green { border-left-color: #3fb950; }
-        .rollout-phase.card-green h4 { color: #3fb950; }
-
         .card-blue { border-left-color: #58a6ff; }
         .card-blue h3, .problem-blue, .icon-blue { color: #58a6ff; }
-        .problem-box.card-blue { border-left-color: #58a6ff; }
-        .card-blue .usp { color: #58a6ff; border-left-color: #58a6ff; }
-        .rollout-phase.card-blue { border-left-color: #58a6ff; }
-        .rollout-phase.card-blue h4 { color: #58a6ff; }
-
         .icon-gold { color: #ffd700; }
-        
         .usp {
             font-style: italic;
             display: block;
@@ -137,6 +132,9 @@
             padding-left: 1rem;
             text-align: left;
         }
+        .card-red .usp { color: #ff4d4d; border-left-color: #ff4d4d; }
+        .card-green .usp { color: #3fb950; border-left-color: #3fb950; }
+        .card-blue .usp { color: #58a6ff; border-left-color: #58a6ff; }
         .vertical-container, .rollout-timeline {
             display: flex;
             flex-direction: column;
@@ -159,8 +157,15 @@
             margin: 0;
             text-align: left;
         }
-
-        /* --- Investor Section Styles --- */
+        .problem-box.card-red { border-left-color: #ff4d4d; }
+        .problem-box.card-green { border-left-color: #3fb950; }
+        .problem-box.card-blue { border-left-color: #58a6ff; }
+        .rollout-phase.card-red { border-left-color: #ff4d4d; }
+        .rollout-phase.card-red h4 { color: #ff4d4d; }
+        .rollout-phase.card-green { border-left-color: #3fb950; }
+        .rollout-phase.card-green h4 { color: #3fb950; }
+        .rollout-phase.card-blue { border-left-color: #58a6ff; }
+        .rollout-phase.card-blue h4 { color: #58a6ff; }
         #investors .section-title {
              color: #3fb950;
         }
@@ -179,24 +184,28 @@
             border-radius: 8px;
         }
         
+        /* Footer Styles */
         footer {
+            background-color: #020617;
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            color: #8b949e;
-            border-top: 1px solid #30363d;
+            padding: 2.5rem;
+            border-top: 1px solid #1e293b;
+            font-weight: 500;
+            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>theblockchain.ai</h1>
         <nav>
-            <a href="#marketplace">Marketplace</a>
-            <a href="#vision">Vision</a>
-            <a href="#roadmap">Roadmap</a>
-            <a href="#investors">For Investors</a>
+            <a href="index.html" class="nav-brand">theBlockchain.ai</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="vision.html">Vision</a>
+                <a href="report.html">Deep Dive</a>
+                <a href="mailto:invest@theblockchain.ai">Invest</a>
+            </div>
         </nav>
     </header>
 
@@ -316,7 +325,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 theblockchain.ai - Building the Future of Trusted AI</p>
+        <p>&copy; 2025 theBlockchain.ai - Building the Future of Trusted AI</p>
     </footer>
 
 </body>
