@@ -1,0 +1,14 @@
+{
+  "name": "theblockchain-ai-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for theBlockchain.ai project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.11.0",
+    "node-fetch": "^2.6.7"
+  }
+}
