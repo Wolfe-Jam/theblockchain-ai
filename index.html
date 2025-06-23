@@ -151,7 +151,6 @@
         .boat:hover {
             transform: scale(1.2);
         }
-        /* Restored Boat Colors */
         .boat:nth-child(1) { color: #555555; }
         .boat:nth-child(2) { color: #444444; }
         .boat:nth-child(3) { color: #333333; }
@@ -193,7 +192,7 @@
             font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: -0.025em;
-            color: #e0f2fe; /* Off-white with a hint of blue */
+            color: #e0f2fe;
             text-shadow: 0 0 5px rgba(125, 211, 252, 0.5), 0 0 10px rgba(0,0,0,0.7);
         }
         .sub-title {
@@ -206,18 +205,28 @@
         }
         .cta-button {
             display: inline-block;
-            background-color: var(--brand-orange); 
             color: white;
             font-weight: 600;
             padding: 0.75rem 2rem;
             border-radius: 9999px;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(255, 145, 77, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
-        .cta-button:hover {
+        .cta-button-orange {
+            background-color: var(--brand-orange); 
+            box-shadow: 0 4px 15px rgba(255, 145, 77, 0.4);
+        }
+        .cta-button-orange:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(255, 145, 77, 0.6);
+        }
+         .cta-button-blue {
+            background-color: var(--brand-blue); 
+            box-shadow: 0 4px 15px rgba(0, 74, 174, 0.4);
+        }
+        .cta-button-blue:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 74, 174, 0.6);
         }
         .scroll-down {
             position: absolute;
@@ -288,7 +297,7 @@
         }
         .accordion-content ul li {
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
             margin-bottom: 1rem;
         }
         .accordion-item.active .accordion-content {
@@ -301,21 +310,22 @@
             transition: transform 0.3s ease;
         }
         
-        /* Accordion Color Styles */
         .problem-accordion .accordion-header { background-color: #1e293b; }
         .problem-accordion .accordion-content { background-color: #0f172a; }
         .problem-accordion .accordion-content ul li::before {
-            content: '×';
-            color: #fca5a5; /* Light Red */
+            content: '❌';
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
         }
         .solution-accordion .accordion-header { background-color: var(--brand-blue); }
-        .solution-accordion .accordion-content { background-color: #002d6b; } /* Darker Blue */
+        .solution-accordion .accordion-content { background-color: #002d6b; } 
         .solution-accordion .accordion-content ul li::before {
-            content: '✓';
-            color: var(--brand-cyan); /* Cyan */
+            content: '✅';
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
         }
-
-        /* Highlight Styles */
         .highlight-problem {
             color: var(--brand-orange);
             text-shadow: 0 0 8px rgba(255, 145, 77, 0.5);
@@ -333,6 +343,21 @@
             border: 1px solid rgba(12, 192, 223, 0.4);
         }
         
+        .founder-promo-box {
+            border: 2px solid var(--brand-cyan);
+            background-color: rgba(12, 192, 223, 0.1);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            color: #e0f2fe;
+        }
+        .founder-promo-box strong {
+            color: white;
+        }
+        
         /* Footer Styles */
         footer {
             background-color: #020617;
@@ -341,6 +366,30 @@
             border-top: 1px solid #1e293b;
             font-weight: 500;
             color: #94a3b8;
+        }
+
+        /* Registration Modal Styles */
+        #registerModal { display: none; }
+        #registerModal .modal-content {
+            background-color: #1e293b;
+            color: white;
+            border: 1px solid var(--brand-cyan);
+        }
+        #registerModal .modal-title {
+            color: var(--brand-cyan);
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+        #registerModal input[type="email"] {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: white;
+        }
+        #registerModal label {
+             margin-left: 0.5rem;
+        }
+        #registerModal input[type="checkbox"] {
+            accent-color: var(--brand-cyan);
         }
 
     </style>
@@ -486,13 +535,54 @@
                 </div>
             </div>
 
-            <div class="text-center mt-24"> <!-- Increased margin-top -->
+            <div class="text-center mt-24">
                  <h2 class="text-3xl font-extrabold text-center mb-6 text-white">Ready to Build the Future of Trusted AI?</h2>
-                 <a href="report.html" class="cta-button">Deep Dive</a>
+                 
+                 <div class="founder-promo-box my-8">
+                     <p><i class="fas fa-rocket mr-2"></i><strong>Founder's Program:</strong> Onboard before <strong>July 31st, 2025</strong> to claim your Founder's Stake. Spots are limited.</p>
+                 </div>
+                 
+                <div class="flex justify-center items-center space-x-4">
+                    <a href="report.html" class="cta-button cta-button-orange">Deep Dive</a>
+                    <button id="registerBtn" class="cta-button cta-button-blue">Register Interest</button>
+                </div>
             </div>
 
         </div>
     </div>
+
+    <!-- Registration Modal -->
+    <div id="registerModal" class="fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm" style="display: none;">
+        <div id="registerModalContent" class="modal-content relative w-full max-w-md p-8 m-4 rounded-lg shadow-2xl" style="background-color: #1e293b; border: 1px solid var(--brand-cyan);">
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+            <div id="registerForm">
+                <h3 class="modal-title text-2xl font-bold mb-4" style="color: var(--brand-cyan);">Join the Founder's Program</h3>
+                <p class="mb-6 text-slate-300">Get early access, claim your Founder's Stake, and help shape the future of open-source [with Trusted AI].</p>
+                <form name="register" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="register">
+                    <div class="mb-4">
+                        <label for="email" class="block mb-2 text-sm font-bold text-gray-300">Email Address</label>
+                        <input type="email" id="email" name="email" class="w-full px-3 py-2 leading-tight text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline" style="background-color: #0f172a; border-color: #334155;" placeholder="you@example.com" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block mb-2 text-sm font-bold text-gray-300">I am a... (Tick all that apply)</label>
+                        <div class="flex flex-col space-y-2">
+                            <label class="inline-flex items-center"><input type="checkbox" name="role" value="developer" class="w-4 h-4 mr-2"><span>Developer</span></label>
+                            <label class="inline-flex items-center"><input type="checkbox" name="role" value="business" class="w-4 h-4 mr-2"><span>Business / Enterprise</span></label>
+                            <label class="inline-flex items-center"><input type="checkbox" name="role" value="data-research" class="w-4 h-4 mr-2"><span>Data Owner / Researcher</span></label>
+                            <label class="inline-flex items-center"><input type="checkbox" name="role" value="other" class="w-4 h-4 mr-2"><span>Other</span></label>
+                        </div>
+                    </div>
+                    <button type="submit" id="submitRegistration" class="cta-button cta-button-orange w-full">Claim My Spot</button>
+                </form>
+            </div>
+            <div id="thankYouMessage" class="text-center" style="display: none;">
+                <h3 class="text-2xl font-bold mb-4" style="color: var(--brand-cyan);">Thank You!</h3>
+                <p class="text-slate-300">You're on the list. We'll be in touch soon with next steps.</p>
+            </div>
+        </div>
+    </div>
+
 
     <footer>
         <p>&copy; 2025 theBlockchain.ai - Building the Future of Trusted AI</p>
@@ -518,16 +608,50 @@
                 header.addEventListener('click', () => {
                     const accordionItem = header.parentElement;
                     
-                    // Close other accordions
                     document.querySelectorAll('.accordion-item').forEach(item => {
                         if (item !== accordionItem) {
                             item.classList.remove('active');
                         }
                     })
 
-                    // Toggle the clicked accordion
                     accordionItem.classList.toggle('active');
                 });
+            });
+
+            // Registration Modal Logic
+            const registerModal = document.getElementById('registerModal');
+            const registerBtn = document.getElementById('registerBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const registerFormDiv = document.getElementById('registerForm');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            const form = document.querySelector('form[name="register"]');
+
+            registerBtn.addEventListener('click', () => {
+                registerModal.style.display = 'flex';
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                registerModal.style.display = 'none';
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+
+                fetch('/', {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString()
+                }).then(() => {
+                    registerFormDiv.style.display = 'none';
+                    thankYouMessage.style.display = 'block';
+                }).catch((error) => alert(error));
+            });
+
+             window.addEventListener('click', (event) => {
+                if (event.target == registerModal) {
+                    registerModal.style.display = 'none';
+                }
             });
         });
     </script>
