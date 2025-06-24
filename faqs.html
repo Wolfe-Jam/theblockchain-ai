@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheBlockchain.ai - FAQs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/Wolfe-Jam/theblockchain-ai/main/Public/theBlockchain-ai-crop-sml.svg" type="image/svg+xml">
+    
+    <style>
+        :root {
+            /* Official Brand Colors */
+            --brand-orange: #FF914D; /* Creative Orange */
+            --brand-cyan: #0CC0DF;   /* Digital Turquoise */
+            --brand-blue: #004AAE;   /* Blockchain Blue */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A;
+            color: #F8FAFC;
+            padding-top: 80px; /* To avoid content going under the fixed header */
+            line-height: 1.7;
+        }
+        h1, h2, h3, h4 {
+            color: #F8FAFC;
+        }
+        .card {
+            background-color: #1E293B;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+        }
+        .btn-base {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+        .btn-primary {
+            background-color: var(--brand-cyan);
+            color: white;
+        }
+        .btn-primary:hover {
+            filter: brightness(1.1);
+        }
+         .btn-accent {
+            background-color: var(--brand-blue);
+            color: white;
+        }
+        .btn-accent:hover {
+            filter: brightness(1.2);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(0, 0, 0, 0.7); /* Black with transparency */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: white;
+        }
+        .nav-links a {
+            color: #cbd5e1; /* Slate 300 */
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Modal specific styles (copied from report.html) */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
+        .modal-content { background-color: #1E293B; color: #F8FAFC; margin: auto; padding: 20px; border-radius: 0.75rem; width: 80%; max-width: 700px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); }
+        .close-button { color: #CBD5E1; float: right; font-size: 28px; font-weight: bold; }
+        .close-button:hover, .close-button:focus { color: #F8FAFC; text-decoration: none; cursor: pointer; }
+        .loading-spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--brand-cyan); border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; margin: 0 auto; display: none; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Footer Styles */
+        footer {
+            background-color: #020617;
+            text-align: center;
+            padding: 2.5rem;
+            border-top: 1px solid #1e293b;
+            font-weight: 500;
+            color: #94a3b8;
+        }
+
+        /* FAQ Accordion Specific Styles */
+        .faq-group {
+            margin-bottom: 2rem;
+        }
+        .faq-group-title {
+            font-size: 2.25rem; /* H2 size for group titles */
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .faq-accordion-item {
+            background-color: #1E293B; /* Card background */
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(51, 65, 85, 0.5); /* Default neutral border */
+            border-left-width: 4px; /* Stronger left border for color coding */
+        }
+        .faq-accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+            background-color: #1E293B; /* Match card background */
+            transition: background-color 0.3s ease;
+        }
+        .faq-accordion-header:hover {
+            background-color: rgba(30, 41, 59, 0.8); /* Slightly lighter on hover */
+        }
+        .faq-accordion-header h3 {
+            font-size: 1.25rem;
+            margin: 0; /* Remove default margin */
+            color: #F8FAFC;
+        }
+        .faq-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding: 0 1.5rem; /* Initial padding */
+            background-color: #0F172A; /* Darker background for content */
+            color: #CBD5E1;
+        }
+        .faq-accordion-content .content-wrapper {
+            padding: 1.5rem 0; /* Vertical padding inside wrapper */
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        .faq-accordion-item.active .faq-accordion-content {
+            max-height: 500px; /* Adjust as needed based on content */
+            padding-bottom: 1.5rem; /* Add padding when open */
+        }
+        .faq-accordion-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        /* Color Coding for FAQ Groups */
+        .faq-group.group-general .faq-group-title { color: var(--brand-blue); }
+        .faq-group.group-general .faq-accordion-item { border-left-color: var(--brand-blue); }
+
+        .faq-group.group-devs .faq-group-title { color: var(--brand-orange); }
+        .faq-group.group-devs .faq-accordion-item { border-left-color: var(--brand-orange); }
+
+        .faq-group.group-commerce .faq-group-title { color: var(--brand-cyan); }
+        .faq-group.group-commerce .faq-accordion-item { border-left-color: var(--brand-cyan); }
+
+        .faq-group.group-token-investors .faq-group-title { color: var(--brand-blue); } /* Reusing blue for token/investor as it ties to blockchain */
+        .faq-group.group-token-investors .faq-accordion-item { border-left-color: var(--brand-blue); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="nav-brand">
+                <img src="https://raw.githubusercontent.com/Wolfe-Jam/theblockchain-ai/main/Public/theBlockchain-ai-crop-sml.svg" alt="Logo" class="h-8 w-auto mr-3">
+                <span>theBlockchain.ai</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="vision.html">Vision</a>
+                <a href="report.html">Deep Dive</a>
+                <a href="faqs.html">FAQs</a> <!-- New link to FAQs page -->
+                <a href="mailto:invest@theblockchain.ai">Invest</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-8 md:p-16">
+        <section id="faq-section" class="my-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-12" style="color: var(--brand-cyan);">
+                Frequently Asked Questions
+            </h1>
+
+            <div class="max-w-3xl mx-auto">
+                <!-- Group: General & Core Vision (Q1, Q2, Q7, Q9, Q10) -->
+                <div class="faq-group group-general">
+                    <h2 class="faq-group-title">General & Core Vision</h2>
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-accordion-item active"> <!-- Active by default -->
+                        <div class="faq-accordion-header">
+                            <h3>1. What is the core mission of theBlockchain.ai?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>The core mission of theBlockchain.ai is to build the economic layer for open-source and trusted AI, fostering a transparent, secure, and collaborative ecosystem where AI's true potential is unlocked on the blockchain. We aim for a Win/Win/Win for developers, businesses, and data owners.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>2. How does theBlockchain.ai ensure trust in AI models and data?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>theBlockchain.ai ensures trust through the integration of blockchain technology, which provides verifiable provenance, immutability, transparency, and auditability for AI models, their lifecycle, and data usage. This creates an unchangeable record that mitigates risks and builds confidence.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 7 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>7. How does theBlockchain.ai address challenges like data silos and "black box" AI models?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>theBlockchain.ai addresses data silos by enabling secure federated learning, allowing collaborative intelligence without centralized data pooling. It tackles "black box" AI concerns by providing verifiable and auditable AI through blockchain's immutable records, ensuring transparency of model provenance and usage.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 9 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>9. What is Federated Learning and how does it relate to theBlockchain.ai?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>Federated Learning is a machine learning technique that trains algorithms across multiple decentralized edge devices or servers, keeping data local and private. theBlockchain.ai incorporates Secure Federated Learning as part of its core vision to enable collaborative AI development while guaranteeing privacy and data security.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 10 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>10. How is theBlockchain.ai positioned competitively against existing AI or blockchain platforms?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>theBlockchain.ai establishes an unassailable strategic position by uniquely integrating blockchain's trust and auditability with a dynamic AI marketplace and custom automation solutions. This convergence creates powerful network effects, a data advantage, and high barriers to entry that differentiate it from fragmented centralized AI platforms and general blockchain solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End group-general -->
+
+                <!-- Group: For Developers (Q4, Q8) -->
+                <div class="faq-group group-devs">
+                    <h2 class="faq-group-title">For Developers</h2>
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>4. How do developers get paid for their code on your platform?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>Developers get paid directly for their code "OUTPUT" through automated smart contracts on the platform. This ensures fair and prompt compensation as their AI modules are utilized, eliminating intermediaries.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 8 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>8. Is the intellectual property (IP) of AI models protected on the platform?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>Yes, robust IP protection mechanisms are a core feature. Blockchain technology provides an indelible, timestamped record of authorship for software and digital assets, and smart contracts facilitate secure intellectual property management, including copyrights and automated licensing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End group-devs -->
+
+                <!-- Group: For Businesses & Commerce (Q3, Q5) -->
+                <div class="faq-group group-commerce">
+                    <h2 class="faq-group-title">For Businesses & Commerce</h2>
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>3. What is 'The OUTPUT Marketplace' and who is it for?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>'The OUTPUT Marketplace' is a unified developer marketplace designed to foster a vibrant AI ecosystem. It's for developers to efficiently publish and monetize their AI automation modules, and for businesses and researchers to easily discover, evaluate, and integrate trustworthy AI solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>5. What are 'Code-In-Action (CIA)' solutions?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>'Code-In-Action (CIA)' refers to our A La Carte model for **C**ustom, **I**ntelligent **A**utomation (CIA). These solutions leverage vetted modules available from The OUTPUT Marketplace to address specific and complex business needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End group-commerce -->
+
+                <!-- Group: For Token & Investors (Q6) -->
+                <div class="faq-group group-token-investors">
+                    <h2 class="faq-group-title">For Token & Investors</h2>
+                    <!-- FAQ Item 6 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h3>6. How does the $BAI Token fit into the ecosystem?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-accordion-content">
+                            <div class="content-wrapper">
+                                <p>The $BAI Token is the native token that underpins the entire economic ecosystem of theBlockchain.ai. It is designed to be used for transactions, staking, and governance within The OUTPUT Marketplace, creating a deep economic moat.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End group-token-investors -->
+
+            </div>
+
+            <!-- Ask AI button for live updates from knowledge base -->
+            <div class="flex justify-center mt-16 mb-8">
+                <button id="askAiButton" class="btn-base btn-accent">
+                    Ask AI about FAQs
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 theBlockchain.ai - Building the Future of Trusted AI</p>
+    </footer>
+
+    <!-- AI Modal (copied from report.html) -->
+    <div id="apiResponseModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modalTitle" class="text-2xl font-bold" style="color: var(--brand-cyan)"></h3>
+            <div id="aiQuestionInputContainer" class="mt-4 mb-4">
+                <textarea id="aiQuestionInput" rows="3" class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:border-cyan-500" placeholder="Type your question about the FAQs or anything else..."></textarea>
+                <button id="submitAiQuestion" class="mt-2 btn-base btn-primary">Submit Question</button>
+            </div>
+            <div class="loading-spinner" id="modalSpinner"></div>
+            <div id="modalContent" class="leading-relaxed mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Accordion functionality
+        document.querySelectorAll('.faq-accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const accordionItem = header.parentElement;
+                const wasActive = accordionItem.classList.contains('active');
+
+                // Close all other accordions
+                document.querySelectorAll('.faq-accordion-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // If it wasn't active, open the clicked one
+                if (!wasActive) {
+                    accordionItem.classList.add('active');
+                }
+            });
+        });
+
+        // AI Modal and Functionality (adapted from report.html)
+        const apiResponseModal = document.getElementById('apiResponseModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const aiQuestionInputContainer = document.getElementById('aiQuestionInputContainer');
+        const aiQuestionInput = document.getElementById('aiQuestionInput');
+        const submitAiQuestion = document.getElementById('submitAiQuestion');
+        const modalContent = document.getElementById('modalContent');
+        const modalSpinner = document.getElementById('modalSpinner');
+        const closeButton = apiResponseModal.querySelector('.close-button');
+        const askAiButton = document.getElementById('askAiButton');
+
+        closeButton.addEventListener('click', () => {
+            apiResponseModal.style.display = 'none';
+            aiQuestionInput.value = '';
+            modalContent.innerHTML = '';
+            aiQuestionInputContainer.style.display = 'block';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === apiResponseModal) {
+                apiResponseModal.style.display = 'none';
+                aiQuestionInput.value = '';
+                modalContent.innerHTML = '';
+                aiQuestionInputContainer.style.display = 'block';
+            }
+        });
+
+        async function callGeminiAPI(userQuestion) {
+            modalTitle.textContent = `AI Insights for: "${userQuestion}"`;
+            modalContent.innerHTML = '';
+            modalSpinner.style.display = 'block';
+            aiQuestionInputContainer.style.display = 'none';
+
+            const netlifyFunctionUrl = '/.netlify/functions/ask-ai'; 
+
+            try {
+                const response = await fetch(netlifyFunctionUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userQuestion: userQuestion })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Server error (${response.status}): ${errorData.message || 'Unknown error'}`);
+                }
+                
+                const result = await response.json();
+
+                if (result.answer) {
+                    modalContent.innerHTML = result.answer.replace(/\n/g, '<br>');
+                } else {
+                    modalContent.innerHTML = '<p style="color:var(--brand-orange)">Error: No answer received from AI. Please try a different question.</p>';
+                }
+            } catch (error) {
+                modalContent.innerHTML = `<p style="color:var(--brand-orange)">Error: ${error.message}. Please check your Netlify function logs.</p>`;
+            } finally {
+                modalSpinner.style.display = 'none';
+            }
+        }
+
+        askAiButton.addEventListener('click', () => {
+            modalTitle.textContent = "Ask AI a Question";
+            aiQuestionInputContainer.style.display = 'block';
+            modalContent.innerHTML = '';
+            apiResponseModal.style.display = 'flex';
+        });
+
+        submitAiQuestion.addEventListener('click', () => {
+            const userQuestion = aiQuestionInput.value.trim();
+            if (!userQuestion) {
+                modalContent.innerHTML = '<p style="color:var(--brand-orange)">Please enter a question.</p>';
+                return;
+            }
+            callGeminiAPI(userQuestion);
+        });
+    });
+    </script>
+</body>
+</html>
