@@ -3,6 +3,7 @@
 // Import necessary modules
 const { GoogleGenerativeAI } = require('@google/generative-ai'); // For interacting with Gemini API
 const fetch = require('node-fetch'); // For making HTTP requests to GitHub (Node.js doesn't have native fetch before Node 18)
+const { logger } = require('./logger'); // Secure logging utility
 
 // Initialize the Google Generative AI client
 // The API key is securely retrieved from Netlify Environment Variables
@@ -39,7 +40,7 @@ exports.handler = async (event) => {
         const knowledgeBasePath = 'docs/knowledge-base'; // Path to your knowledge base within the repo
 
         if (!githubPat || !repoOwner || !repoName) {
-            console.error("Missing GitHub environment variables");
+            logger.error("Missing GitHub environment variables");
             return {
                 statusCode: 500,
                 body: JSON.stringify({ message: 'Server configuration error: GitHub access details missing.' }),
@@ -60,7 +61,7 @@ exports.handler = async (event) => {
 
             const response = await fetch(url, { headers });
             if (!response.ok) {
-                console.error(`Failed to fetch GitHub content from ${url}: ${response.status} ${response.statusText}`);
+                logger.github('Fetch failed', { status: response.status, statusText: response.statusText });
                 throw new Error(`GitHub API error: ${response.statusText}`); // This is the error seen in your logs
             }
             const data = await response.json();
@@ -71,7 +72,7 @@ exports.handler = async (event) => {
                     // If it's a Markdown file, fetch its raw content
                     const fileContentResponse = await fetch(item.download_url, { headers: { 'Authorization': `token ${githubPat}` } });
                     if (!fileContentResponse.ok) {
-                         console.error(`Failed to fetch raw file content from ${item.download_url}: ${fileContentResponse.status} ${fileContentResponse.statusText}`);
+                         logger.github('Raw file fetch failed', { status: fileContentResponse.status, statusText: fileContentResponse.statusText });
                          throw new Error(`GitHub API raw file error: ${fileContentResponse.statusText}`);
                     }
                     const fileContent = await fileContentResponse.text();
@@ -86,9 +87,9 @@ exports.handler = async (event) => {
 
         try {
             await fetchGithubDirContent(knowledgeBasePath);
-            console.log(`Successfully fetched ${fetchedFiles.length} Markdown files.`);
+            logger.github('Knowledge base fetched', { fileCount: fetchedFiles.length });
         } catch (githubError) {
-            console.error("Error fetching from GitHub:", githubError);
+            logger.error("Error fetching from GitHub:", githubError);
             return {
                 statusCode: 500,
                 body: JSON.stringify({ message: `Failed to retrieve knowledge base: ${githubError.message}` }),
@@ -130,7 +131,7 @@ Answer:`; // Added "Answer:" to guide the model
         };
 
     } catch (error) {
-        console.error("Error in Netlify function:", error);
+        logger.error("Error in Netlify function:", error);
         return {
             statusCode: 500,
             body: JSON.stringify({ message: `Internal server error: ${error.message}` }),
